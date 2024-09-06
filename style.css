@@ -24,10 +24,16 @@ body{
 }
 
 #boardContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-    width: 400px;
+    position: relative;
+    display: grid;
+    place-content: center;
+    /*height: 600px;
+    width: 400px;*/
     background-color: aliceblue;
+}
+
+.tile{
+    position: absolute;
+    margin: 0;
+    border: 1px solid black;
 }
