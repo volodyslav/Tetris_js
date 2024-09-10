@@ -1,7 +1,7 @@
 const boardContainer = document.querySelector('#boardContainer');
 boardContainer.style.width = tileSize  * boardWidth + "px";
 boardContainer.style.height = tileSize  * boardHeight + "px";
-
+let block = null;
 // Function to draw tiles on the board. Clears the board first, then draws new tiles from current position.
 function drawTiles(){
     boardContainer.innerHTML = ''; // Clear board container
@@ -38,13 +38,17 @@ function drawBlock(){
 
 // Change 0 to 1
 function changeBoard(){
+    let currentBlockCoordinates = []
     // Iter through block height and width
     for (let h = 0; h < blockSquare.length; h++){
         for (let w = 0; w < blockSquare[0].length; w++){
-            boardArray[h][w + boardMiddle - 1] = 1
-            console.log("Height and width", h, w, w + boardMiddle)
+            boardArray[h][w + boardMiddle - 1] = 1;
+            currentBlockCoordinates.unshift([h, w + boardMiddle - 1]); // save coordinates for further operations
+            console.log("Height and width", h, w, w + boardMiddle-1);
         }
     }
+    console.log("Current block coordinates", currentBlockCoordinates)
+    block = new Block(currentBlockCoordinates);
 }
 
 
@@ -52,4 +56,11 @@ function changeBoard(){
 changeBoard();
 drawTiles();
 drawBlock();
+
+// Move block down every second
+setInterval(() => {
+    block.moveDown();
+    drawTiles();
+    drawBlock();
+}, 400)
 
