@@ -6,17 +6,59 @@ const boardMiddle = boardWidth / 2; // default middle of the board
 
 let boardArray = Array.from({ length: boardHeight }, () => [Array.from({ length: boardWidth }, () => 0)]);  // array of board elements
 
-console.log(boardArray);
-console.log(boardMiddle);
-
-
-
-
-const blockSquare = [
-    [1, 1],
-    [1, 1]
-]
-
+// block elements
 const blocks = [
-   blockSquare, 
+    [
+        [1],
+        [1],
+        [1],
+        [1],
+    ],
+    [
+        [1, 1],
+        [1, 1]
+    ],
+    [
+        [1, 1, 1],
+        [0, 1, 0]
+    ],
+    [
+        [0, 1, 0],
+        [1, 1, 1]
+    ],
+    [
+        [1, 1],
+        [0, 1],
+        [0, 1]
+    ],
+    [
+        [0, 1, 1],
+        [1, 1, 0]
+    ],
+    [
+        [1, 1, 0],
+        [0, 1, 1]
+    ],
+    [
+        [1, 1, 1],
+        [1, 0, 0]
+    ],
+    [
+        [0, 0, 1],
+        [1, 1, 1]
+    ],
+    [
+        [1, 1, 1],
+        [0, 0, 1]
+    ],
+    [
+        [1, 0, 0],
+        [1, 1, 1]
+    ],
+    [
+        [1], [1], [1], [1]
+    ]
 ]
+// Random block
+const blockSquare = blocks[Math.floor(Math.random() * blocks.length - 1)]
+

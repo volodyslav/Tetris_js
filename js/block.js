@@ -15,7 +15,8 @@ class Block{
                             boardArray[h][w] = 0
                             this.block_coordinates[i][0]++ // move down
                             console.log("Found " + h)
-                        }else{
+                        }
+                        else{
                             this.current_block_move = false;
                             break;
                         }
@@ -23,5 +24,6 @@ class Block{
                 }
             }
         }
+        console.log(this.current_block_move)
     }
 }

@@ -42,25 +42,34 @@ function changeBoard(){
     // Iter through block height and width
     for (let h = 0; h < blockSquare.length; h++){
         for (let w = 0; w < blockSquare[0].length; w++){
-            boardArray[h][w + boardMiddle - 1] = 1;
-            currentBlockCoordinates.unshift([h, w + boardMiddle - 1]); // save coordinates for further operations
-            console.log("Height and width", h, w, w + boardMiddle-1);
+            if (blockSquare[h][w] === 1){ // Check if we have 1 in the block
+                boardArray[h][w + boardMiddle - 1] = blockSquare[h][w]; // change
+                currentBlockCoordinates.unshift([h, w + boardMiddle - 1]); // save coordinates for further operations
+                console.log("Height and width", h, w, w + boardMiddle-1);
+            }
         }
     }
     console.log("Current block coordinates", currentBlockCoordinates)
     block = new Block(currentBlockCoordinates);
+    block.current_block_move = true; // set the current block as movable
 }
 
-
+function resetBlock(){
+    block = null; // reset the current block
+    changeBoard(); // change new block
+}
 
 changeBoard();
 drawTiles();
 drawBlock();
+if (block.current_block_move === false){
+    resetBlock(); // reset block if it can't move down anymore
+}
 
 // Move block down every second
 setInterval(() => {
     block.moveDown();
     drawTiles();
     drawBlock();
-}, 400)
+}, 100)
 
