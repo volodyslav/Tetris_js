@@ -67,9 +67,12 @@ if (block.current_block_move === false){
 }
 
 // Move block down every second
-setInterval(() => {
-    block.moveDown();
-    drawTiles();
-    drawBlock();
-}, 100)
+if (block.current_block_move){
+    setInterval(() => {
+        block.moveDown();
+        drawTiles();
+        drawBlock();
+    }, 100)
+}
+
 

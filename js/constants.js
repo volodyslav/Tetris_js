@@ -60,5 +60,5 @@ const blocks = [
     ]
 ]
 // Random block
-const blockSquare = blocks[Math.floor(Math.random() * blocks.length - 1)]
+const blockSquare = blocks[Math.floor(Math.random() * blocks.length)]
 

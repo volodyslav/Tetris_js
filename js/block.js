@@ -6,24 +6,26 @@ class Block{
     }
 
     moveDown(){
-        for (let h = boardHeight; h >= 0 ; h--) {
-            for (let w = boardWidth; w >= 0; w--) {
+        for (let h = boardHeight - 1; h >= 0 ; h--) {
+            for (let w = boardWidth - 1; w >= 0; w--) {
                 for (let i = 0; i < this.block_coordinates.length; i++) {
-                    if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w ){ // move from current position
+                    if ((this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w) && this.current_block_move ){ // move from current position
                         if (boardHeight > h + 1 && boardArray[h + 1][w] !== 1){ // check if h + 1 is 0
                             boardArray[h + 1][w] = 1
                             boardArray[h][w] = 0
                             this.block_coordinates[i][0]++ // move down
-                            console.log("Found " + h)
+                            console.log("Found ", h + 1)
                         }
-                        else{
+                        else if ((h + 1 >= boardHeight) || (boardArray[h + 1][w] === 1)){ 
+                            // Break when there is one block below or nothing
                             this.current_block_move = false;
-                            break;
+                            console.log("Break ", h + 1)
+                            break; //
                         }
                     }
                 }
             }
         }
-        console.log(this.current_block_move)
+        //console.log(this.current_block_move)
     }
 }
