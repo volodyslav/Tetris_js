@@ -15,6 +15,13 @@ class Block{
                             boardArray[h][w] = 0
                             this.block_coordinates[i][0]++ // move down
                             console.log("Found ", h + 1)
+                            if ( w !== 29 &&boardArray[h + 1][w - 1] === 1){
+                                // Break when there is a block on the right or left of the block below or nothing
+                                this.current_block_move = false;
+                                console.log("Break ", w)
+                                break; // Prevents a block from left to continue falling after the block is it's place
+                            }
+                            
                         }
                         else if ((h + 1 >= boardHeight) || (boardArray[h + 1][w] === 1)){ 
                             // Break when there is one block below or nothing

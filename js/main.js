@@ -25,7 +25,7 @@ function drawBlock(){
             if (boardArray[h][w] === 1){
                 const tile = document.createElement("div");
                 tile.classList.add("tile-block");
-                tile.style.backgroundColor = "green"; // change the background color
+                tile.style.backgroundColor = color; // change the background color
                 tile.style.top = h * tileSize + "px";
                 tile.style.left = w * tileSize + "px";
                 tile.style.width = tileSize + "px";
@@ -62,17 +62,19 @@ function resetBlock(){
 changeBoard();
 drawTiles();
 drawBlock();
-if (block.current_block_move === false){
-    resetBlock(); // reset block if it can't move down anymore
-}
+
 
 // Move block down every second
-if (block.current_block_move){
-    setInterval(() => {
-        block.moveDown();
-        drawTiles();
-        drawBlock();
-    }, 100)
-}
+
+setInterval(() => {
+    block.moveDown();
+    drawTiles();
+    drawBlock();
+    // if (block.current_block_move === false){
+    //     resetBlock(); // reset block if it can't move down anymore
+    //     console.log("Game Over!") // print a message when the game is over
+    // }
+    
+}, 100)
 
 
