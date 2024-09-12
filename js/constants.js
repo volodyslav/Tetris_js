@@ -4,7 +4,7 @@ const tileSize = 20; // default tile size
 
 const boardMiddle = boardWidth / 2; // default middle of the board
 
-let boardArray = Array.from({ length: boardHeight }, () => [Array.from({ length: boardWidth }, () => 0)]);  // array of board elements
+let boardArray = Array.from({ length: boardHeight }, () => Array.from({ length: boardWidth }, () => 0));  // array of board elements
 
 // block elements
 const blocks = [

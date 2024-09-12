@@ -1,6 +1,10 @@
 const boardContainer = document.querySelector('#boardContainer');
-boardContainer.style.width = tileSize  * boardWidth + "px";
-boardContainer.style.height = tileSize  * boardHeight + "px";
+boardContainer.style.width = tileSize  * boardWidth + "px"; // width
+boardContainer.style.height = tileSize  * boardHeight + "px"; // height
+
+const leftButton = document.querySelector('#left');
+const rightButton = document.querySelector('#right');
+
 let block = null;
 // Function to draw tiles on the board. Clears the board first, then draws new tiles from current position.
 function drawTiles(){
@@ -38,7 +42,7 @@ function drawBlock(){
 
 // Change 0 to 1
 function changeBoard(){
-    let currentBlockCoordinates = []
+    let currentBlockCoordinates = [] // bottom right block is first
     // Iter through block height and width
     for (let h = 0; h < blockSquare.length; h++){
         for (let w = 0; w < blockSquare[0].length; w++){
@@ -64,8 +68,8 @@ drawTiles();
 drawBlock();
 
 
-// Move block down every second
 
+// Move block down every second
 setInterval(() => {
     block.moveDown();
     drawTiles();
@@ -74,7 +78,6 @@ setInterval(() => {
     //     resetBlock(); // reset block if it can't move down anymore
     //     console.log("Game Over!") // print a message when the game is over
     // }
-    
-}, 100)
+}, 1200)
 
 
