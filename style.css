@@ -61,3 +61,15 @@ body{
     justify-content: space-between;
     margin-top: 20px;
 }
+
+.green-color{
+    background-color: green;
+}
+
+.red-color{
+    background-color: red;
+}
+
+.yellow-color{
+    background-color: yellow;
+}

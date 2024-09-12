@@ -62,23 +62,17 @@ const blocks = [
 
 // Colors
 const colors = [
-    "#FF0000",
-    "#00FF00",
-    "#0000FF",
-    "#FFFF00",
-    "#FF00FF",
-    "#00FFFF",
-    "#C0C0C0",
-    "#800000",
-    "#008000",
-    "#000080",
-    "#808000",
-    "#800080"
+    "greem-color",
+    "red-color",
+    "yellow-color"
 ]
 
-// Random block
-const blockSquare = blocks[Math.floor(Math.random() * blocks.length)]
+function randomBlock(){
+    // Random block
+    return blocks[Math.floor(Math.random() * blocks.length)]
+}
 
-// Random color
-const colorIndex = Math.floor(Math.random() * colors.length)
-const color = colors[colorIndex]
+function randomColor(){
+    // Random color
+    return colors[Math.floor(Math.random() * colors.length)]
+}

@@ -6,6 +6,10 @@ const leftButton = document.querySelector('#left');
 const rightButton = document.querySelector('#right');
 
 let block = null; // block to be displayed
+
+let color = randomColor();
+let blockSquare = randomBlock();
+
 // Function to draw tiles on the board. Clears the board first, then draws new tiles from current position.
 function drawTiles(){
     boardContainer.innerHTML = ''; // Clear board container
@@ -29,7 +33,7 @@ function drawBlock(){
             if (boardArray[h][w] === 1){
                 const tile = document.createElement("div");
                 tile.classList.add("tile-block");
-                tile.style.backgroundColor = color; // change the background color
+                tile.classList.add(`${color}`)
                 tile.style.top = h * tileSize + "px";
                 tile.style.left = w * tileSize + "px";
                 tile.style.width = tileSize + "px";
@@ -61,6 +65,8 @@ function changeBoard(){
 function resetBlock(){
     block = null; // reset the current block
     changeBoard(); // change new block
+    blockSquare = randomBlock();
+    color = randomColor();
 }
 
 changeBoard();
@@ -74,10 +80,9 @@ setInterval(() => {
     block.moveDown();
     drawTiles();
     drawBlock();
-    // if (block.current_block_move === false){
-    //     resetBlock(); // reset block if it can't move down anymore
-    //     console.log("Game Over!") // print a message when the game is over
-    // }
-}, 1200)
+    if (block.current_block_move === false){
+        resetBlock(); // reset block if it can't move down anymore
+    }
+}, 200)
 
 
