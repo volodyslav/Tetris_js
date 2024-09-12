@@ -27,12 +27,11 @@ class Block{
             for (let w = boardWidth - 1; w >= 0; w--) {
                 for (let i = 0; i < this.block_coordinates.length; i++) {
                     if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w && this.current_block_move && this.current_block_right) {
-                        console.log(" h - 1 w + 1", boardArray[h - 1][w + 1])
+                        
                         console.log("w + 1", w + 1)
                         console.log("boardWidth",boardWidth)
                         console.log(this.current_block_right)
-                        if (w + 1 === boardWidth){ // condition to stop move the block to the right
-                            
+                        if (w + 1 === boardWidth  || (w + 1 === boardWidth - 1 && boardArray[h - 1][w + 1] === 1) || (w + 1 === boardWidth - 2 && boardArray[h - 1][w + 2] === 1)){ // Check block size cant move right
                             this.current_block_right = false;
                             console.log("Break ", w + 1)
                             break; // Prevents a block from right to continue falling after the block is it's place

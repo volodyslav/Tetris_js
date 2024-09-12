@@ -41,3 +41,23 @@ body{
     margin: 0;
     border: 1px solid rgb(71, 8, 8); /*Delete*/
 }
+
+.movement{
+    background-color: rgb(4, 33, 111);
+    border: none;
+    border-radius: 10px;
+    color: aliceblue;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.movement:hover{
+    background-color: rgb(18, 64, 189);
+    cursor: pointer;
+}
+
+.controls{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

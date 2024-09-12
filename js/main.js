@@ -5,7 +5,7 @@ boardContainer.style.height = tileSize  * boardHeight + "px"; // height
 const leftButton = document.querySelector('#left');
 const rightButton = document.querySelector('#right');
 
-let block = null;
+let block = null; // block to be displayed
 // Function to draw tiles on the board. Clears the board first, then draws new tiles from current position.
 function drawTiles(){
     boardContainer.innerHTML = ''; // Clear board container
@@ -49,7 +49,7 @@ function changeBoard(){
             if (blockSquare[h][w] === 1){ // Check if we have 1 in the block
                 boardArray[h][w + boardMiddle - 1] = blockSquare[h][w]; // change
                 currentBlockCoordinates.unshift([h, w + boardMiddle - 1]); // save coordinates for further operations
-                console.log("Height and width", h, w, w + boardMiddle-1);
+                //console.log("Height and width", h, w, w + boardMiddle-1);
             }
         }
     }
