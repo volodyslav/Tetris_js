@@ -6,47 +6,73 @@ const boardMiddle = boardWidth / 2; // default middle of the board
 
 let boardArray = Array.from({ length: boardHeight }, () => Array.from({ length: boardWidth }, () => 0));  // array of board elements
 
+const lineBlock = [
+    [1],
+    [1],
+    [1],
+    [1],
+]
+
+const squareBlock = [
+    [1, 1],
+    [1, 1]
+]
+
+const tBlock = [
+    [0, 1, 0],
+    [1, 1, 1]
+]
+
+const sBlock = [
+    [0, 1, 1],
+    [1, 1, 0]
+];
+
+const zBlock = [
+    [1, 1, 0],
+    [0, 1, 1]
+];
+
+const iBlock = [
+    [1, 1, 1, 1]
+];
+
+const jBlock = [
+    [1, 0, 0],
+    [1, 1, 1]
+];
+
+const lBlock = [
+    [0, 0, 1],
+    [1, 1, 1]
+];
+
+const tBlockReversed = [
+    [1, 1, 1],
+    [0, 1, 0]
+];
+
+
+
 // block elements
 const blocks = [
-    [
-        [1],
-        [1],
-        [1],
-        [1],
-    ],
-    [
-        [1, 1],
-        [1, 1]
-    ],
-    [
-        [1, 1, 1],
-        [0, 1, 0]
-    ],
-    [
-        [0, 1, 0],
-        [1, 1, 1]
-    ],
+    lineBlock,
+    squareBlock,
+    tBlockReversed,
+    tBlock,
     [
         [1, 1],
         [0, 1],
         [0, 1]
     ],
-    [
-        [0, 1, 1],
-        [1, 1, 0]
-    ],
-    [
-        [1, 1, 0],
-        [0, 1, 1]
-    ],
+    sBlock,
+    zBlock,
+    jBlock,
     [
         [1, 1, 1],
         [1, 0, 0]
     ],
-    [
-        [0, 0, 1],
-        [1, 1, 1]
-    ],
+    lBlock,
     [
         [1, 1, 1],
         [0, 0, 1]
@@ -55,16 +81,14 @@ const blocks = [
         [1, 0, 0],
         [1, 1, 1]
     ],
-    [
-        [1], [1], [1], [1]
-    ]
+    iBlock
 ]
 
 // Colors
 const colors = [
     "green-color",
     "red-color",
-    "yellow-color"
+    "orange-color"
 ]
 
 function randomBlock(){
