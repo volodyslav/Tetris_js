@@ -82,6 +82,7 @@ function changeBoard(){
     console.log("Current block coordinates", currentBlockCoordinates)
     block = new Block(currentBlockCoordinates, blockName);
     block.current_block_move = true; // set the current block as movable
+    block.countBlocks = 0;
     posBlock.push(currentBlockCoordinates);
 
     console.log("Block square", posBlock);

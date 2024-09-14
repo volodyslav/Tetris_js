@@ -52,7 +52,26 @@ const tBlockReversed = [
     [0, 1, 0]
 ];
 
+const lBlockReversed = [
+    [1, 1],
+    [0, 1],
+    [0, 1]
+];
 
+const jBlockReversed = [
+    [1, 1, 1],
+    [1, 0, 0]
+];
+
+const jBlockReversed2 = [
+    [1, 1, 1],
+    [0, 0, 1]
+];
+
+const lBlockReversed2 =[
+    [1, 0, 0],
+    [1, 1, 1]
+];
 
 // block elements
 const blocks = [
@@ -60,27 +79,14 @@ const blocks = [
     squareBlock,
     tBlockReversed,
     tBlock,
-    [
-        [1, 1],
-        [0, 1],
-        [0, 1]
-    ],
+    lBlockReversed,
     sBlock,
     zBlock,
     jBlock,
-    [
-        [1, 1, 1],
-        [1, 0, 0]
-    ],
+    jBlockReversed,
     lBlock,
-    [
-        [1, 1, 1],
-        [0, 0, 1]
-    ],
-    [
-        [1, 0, 0],
-        [1, 1, 1]
-    ],
+    jBlockReversed2,
+    lBlockReversed2,
     iBlock
 ]
 
@@ -88,7 +94,9 @@ const blocks = [
 const colors = [
     "green-color",
     "red-color",
-    "orange-color"
+    "orange-color",
+    "blue-color",
+    "black-color"
 ]
 
 function randomBlock(){
