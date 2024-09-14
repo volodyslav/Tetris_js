@@ -10,9 +10,12 @@ let block = null; // block to be displayed
 let color = randomColor();
 let blockSquare = randomBlock();
 
+let posBlock = []; // display the color of the block
+let posBlockColor = []; // display the color of the block square
+console.log("Block square", posBlock);
 // Function to draw tiles on the board. Clears the board first, then draws new tiles from current position.
 function drawTiles(){
-    boardContainer.innerHTML = ''; // Clear board container
+    boardContainer.innerHTML = ""; // clear the board first
     for (let i = 0; i < boardWidth; i++){ // Draw tiles from current position
         for (let j = 0; j < boardHeight; j++){
             const tile = document.createElement("div");
@@ -33,7 +36,8 @@ function drawBlock(){
             if (boardArray[h][w] === 1){
                 const tile = document.createElement("div");
                 tile.classList.add("tile-block");
-                tile.classList.add(`${color}`)
+                //tile.classList.add(color)
+                saveBlockColor(tile, h, w)
                 tile.style.top = h * tileSize + "px";
                 tile.style.left = w * tileSize + "px";
                 tile.style.width = tileSize + "px";
@@ -44,9 +48,23 @@ function drawBlock(){
     }
 }
 
+function saveBlockColor(tile, h, w){
+    // Draw tile and tile's color based the coordinates 
+    if (posBlock.length > 0){
+        for (let i = 0; i < posBlock.length; i++){ // all posBlock [[], []]
+            for (let j = 0; j < posBlock[i].length; j++){ // [], []
+                if (h === posBlock[i][j][0] && w === posBlock[i][j][1]){ // h and w in one []
+                    tile.classList.add(posBlockColor[i]) // color of []
+                }
+            }
+        }
+    }
+}
+
 // Change 0 to 1
 function changeBoard(){
     let currentBlockCoordinates = [] // bottom right block is first
+    posBlockColor.push(color); // save coordinates color for later operations
     // Iter through block height and width
     for (let h = 0; h < blockSquare.length; h++){
         for (let w = 0; w < blockSquare[0].length; w++){
@@ -57,9 +75,11 @@ function changeBoard(){
             }
         }
     }
+    
     console.log("Current block coordinates", currentBlockCoordinates)
     block = new Block(currentBlockCoordinates);
     block.current_block_move = true; // set the current block as movable
+    posBlock.push(currentBlockCoordinates);
 }
 
 function resetBlock(){
@@ -74,15 +94,15 @@ drawTiles();
 drawBlock();
 
 
-
 // Move block down every second
 setInterval(() => {
     block.moveDown();
     drawTiles();
     drawBlock();
+
     if (block.current_block_move === false){
         resetBlock(); // reset block if it can't move down anymore
     }
-}, 200)
+}, 1000)
 
 

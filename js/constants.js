@@ -62,7 +62,7 @@ const blocks = [
 
 // Colors
 const colors = [
-    "greem-color",
+    "green-color",
     "red-color",
     "yellow-color"
 ]
