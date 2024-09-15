@@ -118,6 +118,11 @@ class Block{
                                 this.current_block_move = false;
                                 console.log("Block count = ", this.countBlocks)
                                 break;
+                            }
+                            else if (this.blockName === lBlockReversed && this.countBlocks > 2){ // break if more vertical blocks
+                                this.current_block_move = false;
+                                console.log("Block count = ", this.countBlocks)
+                                break;
                             }else{
                                 boardArray[h + 1][w] = 1
                                 boardArray[h][w] = 0
