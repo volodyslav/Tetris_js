@@ -4,6 +4,7 @@ boardContainer.style.height = tileSize  * boardHeight + "px"; // height
 
 const leftButton = document.querySelector('#left');
 const rightButton = document.querySelector('#right');
+const spaceButton = document.querySelector('#space');
 
 let block = null; // block to be displayed
 
@@ -110,6 +111,6 @@ setInterval(() => {
     if (block.current_block_move === false){
         resetBlock(); // reset block if it can't move down anymore
     }
-}, 200)
+}, 300)
 
 

@@ -24,6 +24,9 @@ class Block{
                 this.#moveLeft();
                 this.current_block_right = true; // can be moved from current position
             }
+            if (e.key === "SPACE") {
+                this.#changeBlock();
+            }
         })
 
         rightButton.addEventListener("click", () => {
@@ -35,6 +38,72 @@ class Block{
             this.#moveLeft();
             this.current_block_right = true; // can be moved from current position
         });
+
+        spaceButton.addEventListener("click", () => {
+            this.#changeBlock();
+            
+        });
+    }
+
+    #changeBlock(){
+        let newBlockSquare;
+        let last_coordinates = this.block_coordinates[0];
+        let sizeRotation; // controls width when rotation in oreder prevent left ot right rotation
+        let canRotate = false; // check if width more than allowed
+        switch(this.blockName){
+            case lineBlock:
+                newBlockSquare = iBlock;
+                sizeRotation = 3;
+                break;
+            case squareBlock:
+                // No change for square block
+                return;
+            default:
+                console.error("Unsupported block shape");
+                return;
+                
+        }
+
+        for (let h = boardHeight - 1; h >= 0; h--) {
+            for (let w = boardWidth - 1; w >= 0; w--) {
+                for (let i = 0; i < this.block_coordinates.length; i++) {
+                    if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){
+                        for (let j = 0; j <= sizeRotation; j++){
+                            if (boardArray[h][w + j] === 1){
+                                canRotate = false; // the width is okay
+                                break;
+                            }else if (boardArray[h][w + j] === 0){
+                                // clear previous
+                                boardArray[h][w] = 0;
+                                canRotate = true; // the width is okay
+                                this.blockName = newBlockSquare; // change block name
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        
+        console.log("Cleared previous", this.block_coordinates)
+        if (canRotate){
+            for (let h = 0; h < newBlockSquare.length; h++){
+                for (let w = 0; w < newBlockSquare[0].length; w++){
+                    if (newBlockSquare[h][w] === 1){ // Check if we have 1 in the block
+                        
+                        console.log("Rotate", [h + last_coordinates[0], w + last_coordinates[1]])
+                        boardArray[last_coordinates[0]][last_coordinates[1]] = newBlockSquare[h][w]; // change
+                        this.block_coordinates.unshift([h + last_coordinates[0], w + last_coordinates[1]]); // save coordinates for further operations
+                        this.block_coordinates.pop();// delete previous coordinates
+                    }
+                }
+            }
+            console.log("after added", this.block_coordinates)
+            drawTiles();
+            drawBlock();
+        }
+        
     }
 
     #checkRightMove(){
