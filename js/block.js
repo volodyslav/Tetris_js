@@ -24,7 +24,7 @@ class Block{
                 this.#moveLeft();
                 this.current_block_right = true; // can be moved from current position
             }
-            if (e.key === "SPACE") {
+            if (e.key === " ") {
                 this.#changeBlock();
             }
         })
@@ -50,10 +50,12 @@ class Block{
         let last_coordinates = this.block_coordinates[0];
         let sizeRotation; // controls width when rotation in oreder prevent left ot right rotation
         let canRotate = false; // check if width more than allowed
+        let boardRotateOne; // check if rotation can be done if there is no w + 1 === 0
         switch(this.blockName){
             case lineBlock:
                 newBlockSquare = iBlock;
                 sizeRotation = 3;
+                boardRotateOne = 1
                 break;
             case squareBlock:
                 // No change for square block
@@ -64,22 +66,20 @@ class Block{
                 
         }
 
-        for (let h = boardHeight - 1; h >= 0; h--) {
+        outerLoop: for (let h = boardHeight - 1; h >= 0; h--) {
             for (let w = boardWidth - 1; w >= 0; w--) {
                 for (let i = 0; i < this.block_coordinates.length; i++) {
-                    if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){
-                        for (let j = 0; j <= sizeRotation; j++){
+                    if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){  
+                        for (let j = 1; j <= sizeRotation + 1; j++){ // if any of the block w + 1 === break everything
                             if (boardArray[h][w + j] === 1){
-                                canRotate = false; // the width is okay
-                                break;
-                            }else if (boardArray[h][w + j] === 0){
-                                // clear previous
-                                boardArray[h][w] = 0;
-                                canRotate = true; // the width is okay
-                                this.blockName = newBlockSquare; // change block name
+                                canRotate = false;
+                                break outerLoop; // break everything
                             }
                         }
-                        
+                        boardArray[h][w] = 0;
+                        canRotate = true; // the width is okay
+                        this.blockName = newBlockSquare; // change block name
+
                     }
                 }
             }

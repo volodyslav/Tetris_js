@@ -111,6 +111,6 @@ setInterval(() => {
     if (block.current_block_move === false){
         resetBlock(); // reset block if it can't move down anymore
     }
-}, 300)
+}, 200)
 
 
