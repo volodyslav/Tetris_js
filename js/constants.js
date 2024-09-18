@@ -22,6 +22,11 @@ const tBlock = [
     [0, 1, 0],
     [1, 1, 1]
 ]
+const tBlockReversed1 = [
+    [1, 0],
+    [1, 1],
+    [1, 0]
+]
 
 const sBlock = [
     [0, 1, 1],
@@ -78,6 +83,7 @@ const blocks = [
     lineBlock,
     squareBlock,
     tBlockReversed,
+    tBlockReversed1,
     tBlock,
     lBlockReversed,
     sBlock,

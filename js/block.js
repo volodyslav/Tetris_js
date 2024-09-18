@@ -45,46 +45,75 @@ class Block{
         });
     }
 
+    
+
     #changeBlock(){
         let newBlockSquare;
         let last_coordinates = this.block_coordinates[0];
         let sizeRotation; // controls width when rotation in oreder prevent left ot right rotation
         let canRotate = false; // check if width more than allowed
-        let boardRotateOne; // check if rotation can be done if there is no w + 1 === 0
+
+        let newCoordinates = [] // check if we can rotate (testing)
+        let countBlockRotation = 0;
         switch(this.blockName){
             case lineBlock:
                 newBlockSquare = iBlock;
                 sizeRotation = 3;
-                boardRotateOne = 1
                 break;
+            case iBlock:
+                newBlockSquare = lineBlock;
+                sizeRotation = 0;
+                break;  
             case squareBlock:
                 // No change for square block
                 return;
+            case tBlock:
+                newBlockSquare = tBlockReversed1;
+                sizeRotation = 2;
+                break;
             default:
                 console.error("Unsupported block shape");
                 return;
                 
         }
+        
+        
+        for (let h = 0; h < newBlockSquare.length; h++){ // Mock array
+            for (let w = 0; w < newBlockSquare[0].length; w++){
+                if (newBlockSquare[h][w] === 1){ // Check if we have 1 in the block
+                    newCoordinates.unshift([h + last_coordinates[0], w + last_coordinates[1]]); // save coordinates for further operations
+                }
+            }
+        }
 
-        outerLoop: for (let h = boardHeight - 1; h >= 0; h--) {
+        // Check if we can rotate (testing)
+        for (let h = boardHeight - 1; h >= 0; h--) {
             for (let w = boardWidth - 1; w >= 0; w--) {
-                for (let i = 0; i < this.block_coordinates.length; i++) {
-                    if (this.block_coordinates[i][0] === h && this.block_coordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){  
-                        for (let j = 1; j <= sizeRotation + 1; j++){ // if any of the block w + 1 === break everything
-                            if (boardArray[h][w + j] === 1){
-                                canRotate = false;
-                                break outerLoop; // break everything
-                            }
+                for (let i = 0; i < newCoordinates.length; i++) {
+                    if (newCoordinates[i][0] === h  && newCoordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){  
+                        if (boardArray[h][w] !== 0){
+                            countBlockRotation++;
+                            canRotate = false
                         }
-                        boardArray[h][w] = 0;
-                        canRotate = true; // the width is okay
-                        this.blockName = newBlockSquare; // change block name
-
                     }
                 }
             }
         }
 
+        console.log("Count block rotation", countBlockRotation)
+        if (countBlockRotation < 2){ // Check if we can rotate 1 it's a last_coordinates
+            for (let h = boardHeight - 1; h >= 0; h--) {
+                for (let w = boardWidth - 1; w >= 0; w--) {
+                    for (let i = 0; i < this.block_coordinates.length; i++) {
+                        if (this.block_coordinates[i][0] === h  && this.block_coordinates[i][1] === w && this.current_block_move && w < boardWidth - sizeRotation){
+                            boardArray[h][w] = 0;
+                            canRotate = true; // the width is okay
+                            this.blockName = newBlockSquare; // change block name
+                        }
+                    }
+                }
+            }
+        }
         
         console.log("Cleared previous", this.block_coordinates)
         if (canRotate){
@@ -141,7 +170,7 @@ class Block{
                                 this.current_block_right = false;
                                 break;
                             }
-                            else if ((this.blockName === lBlockReversed) && this.countBlocksRight > 1){
+                            else if ((this.blockName === lBlockReversed || this.blockName === tBlockReversed1) && this.countBlocksRight > 1){
                                 this.current_block_right = false;
                                 break;
                             }
@@ -203,7 +232,7 @@ class Block{
                                 this.current_block_left = false;
                                 break;
                             }
-                            else if ((this.blockName === iBlock) && this.countBlocksLeft > 3){
+                            else if ((this.blockName === iBlock || this.blockName === tBlockReversed1) && this.countBlocksLeft > 3){
                                 this.current_block_left = false;
                                 break;
                             }
@@ -252,14 +281,11 @@ class Block{
                                 this.current_block_move = false;
                                 break;
                             }
-                            else if (this.blockName === squareBlock && this.countBlocks > 2){ // break if more vertical blocks
+                            else if ((this.blockName === squareBlock || this.blockName === lBlockReversed || this.blockName === tBlockReversed1) && this.countBlocks > 2){ // break if more vertical blocks
                                 this.current_block_move = false;
                                 break;
                             }
-                            else if (this.blockName === lBlockReversed && this.countBlocks > 2){ // break if more vertical blocks
-                                this.current_block_move = false;
-                                break;
-                            }else{
+                            else{
                                 boardArray[h + 1][w] = 1
                                 boardArray[h][w] = 0
                                 this.block_coordinates[i][0]++ // change the instial array with coordinates 
