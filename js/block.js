@@ -68,8 +68,44 @@ class Block{
                 // No change for square block
                 return;
             case tBlock:
+                newBlockSquare = tBlockReversed;
+                sizeRotation = 2;
+                break;
+            case tBlockReversed:
+                newBlockSquare = tBlock;
+                sizeRotation = 2;
+                break;
+            case tBlockReversed1:
+                newBlockSquare = tBlockReversed2;
+                sizeRotation = 2;
+                break;
+            case tBlockReversed2:
                 newBlockSquare = tBlockReversed1;
                 sizeRotation = 2;
+                break;
+            case jBlock:
+                newBlockSquare = lBlock;
+                sizeRotation = 1;
+                break;
+            case lBlock:
+                newBlockSquare = jBlock;
+                sizeRotation = 1;
+                break;
+            case jBlockReversed:
+                newBlockSquare = jBlockReversed2;
+                sizeRotation = 1;
+                break;
+            case jBlockReversed2:
+                newBlockSquare = jBlockReversed;
+                sizeRotation = 1;
+                break;
+            case sBlock:
+                newBlockSquare = zBlock;
+                sizeRotation = 1;
+                break;
+            case zBlock:
+                newBlockSquare = sBlock;
+                sizeRotation = 1;
                 break;
             default:
                 console.error("Unsupported block shape");
@@ -79,7 +115,7 @@ class Block{
         
         
         for (let h = 0; h < newBlockSquare.length; h++){ // Mock array
-            for (let w = 0; w < newBlockSquare[0].length; w++){
+            for (let w = 0; w < newBlockSquare[0].length ; w++){
                 if (newBlockSquare[h][w] === 1){ // Check if we have 1 in the block
                     newCoordinates.unshift([h + last_coordinates[0], w + last_coordinates[1]]); // save coordinates for further operations
                 }
@@ -170,7 +206,7 @@ class Block{
                                 this.current_block_right = false;
                                 break;
                             }
-                            else if ((this.blockName === lBlockReversed || this.blockName === tBlockReversed1) && this.countBlocksRight > 1){
+                            else if ((this.blockName === lBlockReversed || this.blockName === tBlockReversed1 || this.blockName === tBlockReversed2) && this.countBlocksRight > 1){
                                 this.current_block_right = false;
                                 break;
                             }
@@ -228,7 +264,7 @@ class Block{
                                 this.current_block_left = false;
                                 break;
                             }
-                            else if ((this.blockName === lBlockReversed) && this.countBlocksLeft > 1){
+                            else if ((this.blockName === lBlockReversed || this.blockName === tBlockReversed2) && this.countBlocksLeft > 1){
                                 this.current_block_left = false;
                                 break;
                             }
@@ -281,7 +317,7 @@ class Block{
                                 this.current_block_move = false;
                                 break;
                             }
-                            else if ((this.blockName === squareBlock || this.blockName === lBlockReversed || this.blockName === tBlockReversed1) && this.countBlocks > 2){ // break if more vertical blocks
+                            else if ((this.blockName === squareBlock || this.blockName === lBlockReversed || this.blockName === tBlockReversed1 || this.blockName === tBlockReversed2) && this.countBlocks > 2){ // break if more vertical blocks
                                 this.current_block_move = false;
                                 break;
                             }

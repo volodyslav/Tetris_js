@@ -13,6 +13,10 @@ const lineBlock = [
     [1],
 ]
 
+const iBlock = [
+    [1, 1, 1, 1]
+];
+
 const squareBlock = [
     [1, 1],
     [1, 1]
@@ -28,6 +32,17 @@ const tBlockReversed1 = [
     [1, 0]
 ]
 
+const tBlockReversed = [
+    [1, 1, 1],
+    [0, 1, 0]
+];
+
+const tBlockReversed2 = [
+    [0, 1],
+    [1, 1],
+    [0, 1]
+]
+
 const sBlock = [
     [0, 1, 1],
     [1, 1, 0]
@@ -38,9 +53,7 @@ const zBlock = [
     [0, 1, 1]
 ];
 
-const iBlock = [
-    [1, 1, 1, 1]
-];
+
 
 const jBlock = [
     [1, 0, 0],
@@ -52,10 +65,7 @@ const lBlock = [
     [1, 1, 1]
 ];
 
-const tBlockReversed = [
-    [1, 1, 1],
-    [0, 1, 0]
-];
+
 
 const lBlockReversed = [
     [1, 1],
